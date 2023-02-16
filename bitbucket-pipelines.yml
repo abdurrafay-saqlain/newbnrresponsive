@@ -1,0 +1,15 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    development:
+    - step:
+        name: Deployment
+        deployment: Dev environment
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: $username
+              SERVER: $server_ip
+              MODE: 'script'
+              COMMAND: 'deploy.sh'
